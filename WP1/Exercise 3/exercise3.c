@@ -1,0 +1,36 @@
+//Submission number: 2763534813
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int randomNum;
+    int input;
+    char opinion;
+    int numOfGuess = 0;
+    srand(time(NULL));
+    randomNum = rand() % 100;
+    // Generate a random number
+    do {
+        printf("Would you like to start a round of the game? Type Y if you want to start a round or F if you want to exit the program: ");
+        scanf("%c", &opinion);
+        if (opinion == 'Y') {
+            do {
+                printf("Please give a guess between 1 and 100: ");
+                scanf("%d", &input);
+                if (input > randomNum) {
+                    printf("Your guess is too high, please give another guess! \n");
+                    numOfGuess++;
+                } else if (randomNum > input) {
+                    printf("Your guess is too low, please give another guess! \n");
+                    numOfGuess++;
+                } else {
+                    numOfGuess++;
+                    printf("You have guessed %d times and your guess is correct!", numOfGuess);
+                }
+            } while (input != randomNum);
+        } else if (opinion == 'F') {
+            return 0;
+        }
+    }while(1);
+}
