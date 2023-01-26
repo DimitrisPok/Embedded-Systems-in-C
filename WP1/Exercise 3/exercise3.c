@@ -21,11 +21,11 @@ int main() {
                 printf("Please give a guess between 1 and 100: ");
                 scanf("%d", &input);
                 if (input > randomNum) {
-                    printf("Your guess is too high, please give another guess! You have %d attempts left :) \n", 9 - numOfGuess);
                     numOfGuess++;
+                    printf("Your guess is too high, please give another guess! You have %d more attempts:) \n", 10 - numOfGuess);
                 } else if (randomNum > input) {
-                    printf("Your guess is too low, please give another guess! You have %d attempts left :) \n ", 9 - numOfGuess);
                     numOfGuess++;
+                    printf("Your guess is too low, please give another guess! You have %d more attempts:) \n ", 10 - numOfGuess);
                 }
                 else {
                     numOfGuess++;
