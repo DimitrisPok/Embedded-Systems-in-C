@@ -5,15 +5,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-void print_binary(unsigned long decimal) {
-    if (decimal == 0) {
-        return;
-    }
-    print_binary(decimal >> 1);
-    printf("%ld", decimal & 1);
+void printbin(unsigned char val)
+{
+    for(unsigned char i = 0x80; i; i >>= 1)
+        printf("%c", val & i ? '1' : '0');
+    printf("\n");
 }
 
 int main(int argc, char *argv[]) {
+
     if (argc < 2) {
         printf("Error: No input provided.\n");
         printf("Usage: dec2bin [decimal number]\n");
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         printf("Usage: dec2bin [decimal number]\n");
         return 2;
     }
-    print_binary(decimal);
+    printbin(decimal);
     printf("\n");
     return 0;
 }

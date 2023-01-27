@@ -6,6 +6,7 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
+    
     if (argc < 2) {
         printf("Error: No input provided.\n");
         printf("Usage: bin2hex [binary number]\n");
@@ -25,6 +26,6 @@ int main(int argc, char *argv[]) {
         }
     }
     unsigned long decimal = strtoul(argv[1], NULL, 2);
-    printf("%lX\n", decimal);
+    printf("%02X\n", decimal);
     return 0;
 }
