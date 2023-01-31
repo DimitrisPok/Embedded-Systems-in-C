@@ -42,17 +42,15 @@ int main(int argc, char *argv[])
     printf("\n Add a new record: ");
     //scanning the input and assigning it to the data variable
     scanf("%d", &data);
-    if(data != NULL){ //if user gives input
-        //tests the add_first function
-        head = add_first(head, data);
-        act_post=head;
-        //sets element value to 0 so that the user's input gets added to the first element
-        nr=0;
-        //prints the linked list
-        while( act_post!=NULL){ 
-            printf("\n Post nr %d : %d" , nr++, act_post->number); 
-            act_post=act_post->next; 
-        }
+    //tests the add_first function
+    head = add_first(head, data);
+    act_post=head;
+    //sets element value to 0 so that the user's input gets added to the first element
+    nr=0;
+    //prints the linked list
+    while( act_post!=NULL){ 
+        printf("\n Post nr %d : %d" , nr++, act_post->number); 
+        act_post=act_post->next; 
     }
        
  // --- Free the allocated memory  --- 
@@ -106,9 +104,5 @@ REGTYPE* add_first(REGTYPE* temp, int data){
     item = (REGTYPE *)malloc(20 * sizeof(REGTYPE)); //allocating memory
     item->number = data; //link number with the input the user gave (ie. data)
     item->next = temp; //link the next value to temp
-    item->prev= NULL; //make prev equal to null to ensure that nothing is before the element
-    if(temp != NULL){
-        temp->prev = item; 
-    }
     return item;
 } 
