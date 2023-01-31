@@ -42,8 +42,13 @@ int main(int argc, char *argv[])
     printf("\n Add a new record: ");
     //scanning the input and assigning it to the data variable
     scanf("%d", &data);
-    if(data != NULL){
-        add_first(head, data);
+    if(data != NULL){ //if user gives input
+        //tests the add_first function
+        head = add_first(head, data);
+        act_post=head;
+        //sets element value to 0 so that the user's input gets added to the first element
+        nr=0;
+        //prints the linked list
         while( act_post!=NULL){ 
             printf("\n Post nr %d : %d" , nr++, act_post->number); 
             act_post=act_post->next; 
