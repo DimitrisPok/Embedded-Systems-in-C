@@ -100,9 +100,13 @@ REGTYPE* random_list(int size){
 //==========================================================                 
  
 REGTYPE* add_first(REGTYPE* temp, int data){ 
+    //new first entry in the list variable definition
     REGTYPE *item =NULL;
     item = (REGTYPE *)malloc(20 * sizeof(REGTYPE)); //allocating memory
+    
     item->number = data; //link number with the input the user gave (ie. data)
     item->next = temp; //link the next value to temp
+
+    //returns a pointer to the new first entry
     return item;
 } 
