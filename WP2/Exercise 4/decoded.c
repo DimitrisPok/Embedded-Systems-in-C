@@ -1,9 +1,9 @@
 //(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
 //Work package 2
 //Submission number: 
+
 #include <stdio.h>
 #include <stdlib.h>
-
 
 //main
 int main(int argc, char *argv[]) 

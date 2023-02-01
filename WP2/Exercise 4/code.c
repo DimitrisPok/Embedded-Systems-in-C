@@ -1,14 +1,13 @@
 //(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
 //Work package 2
 //Submission number:
+
 #include <stdio.h>
 #include <stdlib.h>
-
 
 //main
 int main(int argc, char *argv[]) 
 {
-    
     //to check if the arguments are exactly 5 values
     if(argc != 6){
         printf("Error: You need to give 5 values!");
