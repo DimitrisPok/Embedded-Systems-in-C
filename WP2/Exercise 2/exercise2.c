@@ -1,3 +1,7 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 2
+//Submission number: 
+
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <time.h> 
@@ -103,7 +107,7 @@ REGTYPE* add_first(REGTYPE* temp, int data){
     //new first entry in the list variable definition
     REGTYPE *item =NULL;
     item = (REGTYPE *)malloc(20 * sizeof(REGTYPE)); //allocating memory
-    
+
     item->number = data; //link number with the input the user gave (ie. data)
     item->next = temp; //link the next value to temp
 

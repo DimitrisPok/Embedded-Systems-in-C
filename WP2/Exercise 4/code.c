@@ -1,11 +1,6 @@
-/*
-So in the first program they just want you to store the five numbers in an unsigned char variable 
-and then convert that and print it out as hecadecimal
-
-In the second program you convert the hexadecimal back to those 5 values and fill the table with the values
-To store the values in the unsigned char you should use bitwise operators
-*/
-
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 2
+//Submission number:
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,7 +9,7 @@ To store the values in the unsigned char you should use bitwise operators
 int main(int argc, char *argv[]) 
 {
     
-    //to check if the user gave exactly 5 values or not
+    //to check if the arguments are exactly 5 values
     if(argc != 6){
         printf("Error: You need to give 5 values!");
         return 1;
