@@ -1,6 +1,6 @@
 //(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
 //Work package 2
-//Submission number: 
+//Submission number: 0267702620
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     int gear_pos = (hex >> 4) & 3; //shifts right 4 positions (because it is the 4th bit) and compares to 7 (because it is 3 bits)
     int key_pos = (hex >> 2) & 2; //shifts right 2 positions (because it is the 3rd bit) and compares to 2 (because it is 2 bits)
     int brake1 = (hex >> 1) & 1; //shifts right 1 position (because it is the 2nd bit) and compares to 1 (because it is 1 bit)
-    int brake2 = hex & 1; //no shifting (because its the last bit) and compares to 1 (because it is 1 bit)
+    int brake2 = hex & 1;       //no shifting (because its the last bit) and compares to 1 (because it is 1 bit)
 
     //prints values into the table
     printf("Name          Value     \n");
