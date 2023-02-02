@@ -18,7 +18,7 @@ typedef struct q{
  
 // ##### Function declarations   ##### 
  
-REGTYPE* random_list(int size); 
+REGTYPE* random_list(void); 
 REGTYPE* add_first(REGTYPE* temp, int data); 
  
  
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     REGTYPE *act_post , *head=NULL; 
 
         srand(time(0));  //   Random seed  
-        head=random_list(MAX); 
+        head=random_list(); 
         if (head == NULL){
             return 1;
         }
@@ -71,12 +71,12 @@ int main(int argc, char *argv[])
  
 // ====     End of main   ====================================== 
  
-REGTYPE* random_list(int size){ 
+REGTYPE* random_list(void){ 
     int nr, i=0; 
     REGTYPE *top = NULL, *old = NULL, *item = NULL;
 
     //iterating through list
-    for(i = 0; i < size; i++){
+    for(i = 0; i < MAX; i++){
         item = (REGTYPE *)malloc(20 * sizeof(REGTYPE)); //allocating memory
 
         //terminate program if memory not allocated
@@ -110,7 +110,8 @@ REGTYPE* add_first(REGTYPE* temp, int data){
 
     item->number = data; //link number with the input the user gave (ie. data)
     item->next = temp; //link the next value to temp
+    temp = item; //make temp (ie. the first element) equal to the new item
 
     //returns a pointer to the new first entry
-    return item;
+    return temp;
 } 

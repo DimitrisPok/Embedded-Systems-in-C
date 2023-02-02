@@ -18,12 +18,14 @@ int main(int argc, char *argv[])
     unsigned char hex = 0;
     sscanf(argv[1], "%x", &hex);
 
-    //unpacks values
-    int engine_on = (hex >> 7) & 1; //shifts right to the first bit and compares to 1
-    int gear_pos = (hex >> 4) & 7; //shifts right to the 4th bit and compares to 7
-    int key_pos = (hex >> 2) & 2; //shifts right to the 6th bit and compares to 2
-    int brake1 = (hex >> 1) & 1; //shifts right to the 7th bit and compares to 1
-    int brake2 = hex & 1; //no shifting because its the last bit and compares to 1
+    //unpacks values by...
+    //unshifting all of the values (so cancels the left shifts by using right shifts) 
+    //uses bitwise & operator to convert the hex back to binary
+    int engine_on = (hex >> 7) & 1; //shifts right 7 positions (because it is the 8th bit) and compares to 1 (because it is 1 bit)
+    int gear_pos = (hex >> 4) & 3; //shifts right 4 positions (because it is the 4th bit) and compares to 7 (because it is 3 bits)
+    int key_pos = (hex >> 2) & 2; //shifts right 2 positions (because it is the 3rd bit) and compares to 2 (because it is 2 bits)
+    int brake1 = (hex >> 1) & 1; //shifts right 1 position (because it is the 2nd bit) and compares to 1 (because it is 1 bit)
+    int brake2 = hex & 1; //no shifting (because its the last bit) and compares to 1 (because it is 1 bit)
 
     //prints values into the table
     printf("Name          Value     \n");

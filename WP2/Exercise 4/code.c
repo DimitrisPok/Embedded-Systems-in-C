@@ -34,7 +34,12 @@ int main(int argc, char *argv[])
 
     //pack values into byte (unsigned char)
     unsigned char byte;
-    byte =  engine_on << 7 | gear_pos << 4 | key_pos << 2 | brake1 << 1 | brake2;
+    byte =  engine_on << 7 | gear_pos << 4 | key_pos << 2 | brake1 << 1 | brake2; 
+            //engine_on: shifts left 7 positions (because it is the 8th bit)
+            //gear_pos: shifts left 4 positions (because it is the 4th bit)
+            //key_pos: shifts left 2 positions (because it is the 3rd bit)
+            //brake1: shifts left 1 position (because it is the 2nd bit)
+            //brake2: no shifting (because its the last bit)
 
     //convert byte to hexadecimal
     printf("%02x", byte);
