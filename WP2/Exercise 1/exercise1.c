@@ -49,16 +49,16 @@ int main() {
                 printf("Enter starting position (x y): ");             //requests starting coordinates
                 scanf("%d%d", &robot.xpos, &robot.ypos);
                 if(robot.xpos < 0 || robot.xpos > 99 ||
-                   robot.ypos < 0 || robot.ypos > 99) {                //if entered coordinattes
+                   robot.ypos < 0 || robot.ypos > 99) {                //if entered coordinates
                         printf("Position out of range, try again\n");  //are out of range
                         continue;
                 }
                 printf("Enter string of instructions (m - move, t - turn): ");
-                while(scanf(" %c", &instr) == 1 && instr != 'd') {     //entering 'd' ends the program
-                        if(instr == 'm') move(&robot);                 //and prints the new position
-                        else if(instr == 't') turn(&robot);
+                while(scanf(" %c", &instr) == 1 && instr != 'd') {     //as long as char read is not
+                        if(instr == 'm') move(&robot);                 //equal to 'd' the program keeps
+                        else if(instr == 't') turn(&robot);            //asking for instructions
                 }
-                printf("New position: (%d, %d)\n", robot.xpos, robot.ypos);
-        }
+                printf("New position: (%d, %d)\n", robot.xpos, robot.ypos); //after char read = 'd' it 
+        }                                                                   //prints the position
         return 0;
 }
