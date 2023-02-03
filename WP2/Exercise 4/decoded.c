@@ -7,31 +7,33 @@
 #include <math.h>
 #include <string.h>
 
+
+ //function that converts hexadecimal value to decimal
 int hex2dec (char *hexadec){
     int decimal = 0;
-    //converts the hexadecimal value to decimal
+    
     for (int i = 0; i < strlen(hexadec); i++){ //loops through the provided hexadecimal characters
-    int dec = 0; //initialzing variable dec
+    int dec = 0;                                //initialzing variable dec
     if (hexadec[i] >= '0' && hexadec[i] <= '9'){ //checks if the hexadec char is greater than or equal to zero or less than or equal to 9
-        dec = hexadec[i] - '0'; //compares to 0
+        dec = hexadec[i] - '0';                  //compares to 0
     }
     else if (hexadec[i] >= 'A' && hexadec[i] <= 'F'){ //checks if the hexadec char is greater than or equal to A or less than or equal to F
-        dec = hexadec[i] - 'A' + 10; // compares to A and adds 10
+        dec = hexadec[i] - 'A' + 10;                 // compares to A and adds 10
     }
-    //to make sure the program is case insensitive 
+                                                        //comparisions to lower case hexadecimal values
     else if (hexadec[i] >= 'a' && hexadec[i] <= 'f'){ //checks if the hexadec char is greater than or equal to a or less than or equal to f
-        dec = hexadec[i] - 'a' + 10; //comares to a and adds 10
+        dec = hexadec[i] - 'a' + 10;                 //comares to a and adds 10
     }
-    else{ //otherwise the hexadecimal is invalid and the program is existed
+                                                    //otherwise the hexadecimal is invalid and the program is existed
+    else{ 
         printf("Error: please give a valid hexadecimal value!");
         return 1;
     }
-    //multiply the dec value retained from the above if statements and power to 16
-    decimal += dec * pow(16, strlen(hexadec) - i - 1);
+    
+    decimal += dec * pow(16, strlen(hexadec) - i - 1); //multiply the dec value retained from the above if statements and power to 16
     }
 
-    //return the converted hexadecimal (ie. the decimal value)
-    return decimal;
+    return decimal;                                   //return the converted hexadecimal (ie. the decimal value)
 }
 //main
 int main(int argc, char *argv[]) 
