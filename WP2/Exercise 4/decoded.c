@@ -7,62 +7,51 @@
 #include <math.h>
 #include <string.h>
 
+int hex2dec (char *hexadec){
+    int decimal = 0;
+    //converts the hexadecimal value to decimal
+    for (int i = 0; i < strlen(hexadec); i++){ //loops through the provided hexadecimal characters
+    int dec = 0; //initialzing variable dec
+    if (hexadec[i] >= '0' && hexadec[i] <= '9'){ //checks if the hexadec char is greater than or equal to zero or less than or equal to 9
+        dec = hexadec[i] - '0'; //compares to 0
+    }
+    else if (hexadec[i] >= 'A' && hexadec[i] <= 'F'){ //checks if the hexadec char is greater than or equal to A or less than or equal to F
+        dec = hexadec[i] - 'A' + 10; // compares to A and adds 10
+    }
+    //to make sure the program is case insensitive 
+    else if (hexadec[i] >= 'a' && hexadec[i] <= 'f'){ //checks if the hexadec char is greater than or equal to a or less than or equal to f
+        dec = hexadec[i] - 'a' + 10; //comares to a and adds 10
+    }
+    else{ //otherwise the hexadecimal is invalid and the program is existed
+        printf("Error: please give a valid hexadecimal value!");
+        return 1;
+    }
+    //multiply the dec value retained from the above if statements and power to 16
+    decimal += dec * pow(16, strlen(hexadec) - i - 1);
+    }
+
+    //return the converted hexadecimal (ie. the decimal value)
+    return decimal;
+}
 //main
 int main(int argc, char *argv[]) 
 {
-    const char hexValues[] = "0123456789ABCDEF"; //array of chars that could be in a hexadecimal
-    unsigned char hexadec[2]; //hexadecimal input (up to two chars)
-    int correctHex = 0; //variable to ease the validation of hexadecimal input
-
     //to check if the argument is exactly 1
     if(argc != 2){
         printf("Error: You need to give exactly 1 input, specifically a hexadecimal value!");
         return 1;
     }
 
-    sscanf(argv[1], "%s", hexadec);
+    char* hexadec = argv[1]; //make the arguement equal to hexadec
 
-    
-    for(int i = 0; i < strlen(hexadec); i++){ //loops through each char in the hexadec input
-        for(int j = 0; j < strlen(hexValues); j++){ //loops through each char in the hex array
-            if(hexadec[i]==hexValues[j]){          //checks if the hexadec is in the hex array
-                correctHex = 1;
-                break;
-            }
-        }
-        //checks if the hexadec is valid, if not the program is exited
-        if(!correctHex){
-            printf("Error: please give a valid hexadecimal value!");
-            return 1;
-        }
-    }
-
-/*
-    //scans the user's input and saves it to hex (unsigned char)
-    unsigned char hex = 0;
-    sscanf(argv[1], "%x", &hex);
-
-    //converts the hexadecimal back to the correct values values using bitwise operator (&) and (>>)
-    int engine_on = (hex >> 7) & 1; //shifts right 7 positions (because it is the 8th bit) and compares to 1 (because it is 1 bit)
-    int gear_pos = (hex >> 4) & 3; //shifts right 4 positions (because it is the 4th bit) and compares to 7 (because it is 3 bits)
-    int key_pos = (hex >> 2) & 2; //shifts right 2 positions (because it is the 3rd bit) and compares to 2 (because it is 2 bits)
-    int brake1 = (hex >> 1) & 1; //shifts right 1 position (because it is the 2nd bit) and compares to 1 (because it is 1 bit)
-    int brake2 = hex & 1;       //no shifting (because its the last bit) and compares to 1 (because it is 1 bit)
-    
-*/
-   //The above is a program that also works however we are unsure which approach you expect us to have
-    //uncomment the above to test out our first approach to this exercise
-
-
-    //converts the hexadecimal value to decimal
-     unsigned char byte = (unsigned char) strtol(hexadec, NULL, 16);
+    int decimal = hex2dec(hexadec); //use the hexadec variable to give as a parameter for the hex2dec function and call the function
 
     //takes byte and converts back to the correct values using bitwise operator (&) and (>>)
-    int engine_on = (byte & 128) >> 7; //compares to 128 because it is bit 7, shifts right 7 positions (because it is the 8th bit)
-    int gear_pos = (byte & 56) >> 4; //compares to 56 because it is bits 6-4, shifts right 4 positions (because it is the 4th bit)
-    int key_pos = (byte & 12) >> 2; //compares to 12 because it is bits 3-2, shifts right 2 positions (because it is the 3rd bit)
-    int brake1 = (byte & 2) >> 1; //compares to 2 because it is bit 1, shifts right 1 position (because it is the 2nd bit)
-    int brake2 = (byte & 1); //compares to 1 because it is bit 0, no shifting (because its the last bit)
+    int engine_on = (decimal & 128) >> 7; //compares to 128 because it is bit 7, shifts right 7 positions (because it is the 8th bit)
+    int gear_pos = (decimal & 56) >> 4; //compares to 56 because it is bits 6-4, shifts right 4 positions (because it is the 4th bit)
+    int key_pos = (decimal & 12) >> 2; //compares to 12 because it is bits 3-2, shifts right 2 positions (because it is the 3rd bit)
+    int brake1 = (decimal & 2) >> 1; //compares to 2 because it is bit 1, shifts right 1 position (because it is the 2nd bit)
+    int brake2 = (decimal & 1); //compares to 1 because it is bit 0, no shifting (because its the last bit)
 
 
     //prints error message if the user inputs a hexadecimal the converts to values not in the correct range
