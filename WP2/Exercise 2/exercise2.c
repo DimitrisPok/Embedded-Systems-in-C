@@ -82,7 +82,8 @@ REGTYPE* random_list(void){
             return NULL;
         }
 
-        item->number = rand() % 101; //link number to the rand() which generates a random number from 0-100 
+        nr = rand() % 101; //nr is now a random number generator from 0-100
+        item->number = nr; //link item to number and make equal to nr
         item->next = NULL; //link next with null
 
         if(top == NULL){ //if value has no top
