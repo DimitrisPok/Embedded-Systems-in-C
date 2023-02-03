@@ -10,7 +10,7 @@
 //main
 int main(int argc, char *argv[]) 
 {
-    const char hex[] = "0123456789ABCDEF"; //array of chars that could be in a hexadecimal
+    const char hexValues[] = "0123456789ABCDEF"; //array of chars that could be in a hexadecimal
     unsigned char hexadec[2]; //hexadecimal input (up to two chars)
     int correctHex = 0; //variable to ease the validation of hexadecimal input
 
@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
 
     
     for(int i = 0; i < strlen(hexadec); i++){ //loops through each char in the hexadec input
-        for(int j = 0; j < strlen(hex); j++){ //loops through each char in the hex array
-            if(hexadec[i]==hex[j]){          //checks if the hexadec is in the hex array
+        for(int j = 0; j < strlen(hexValues); j++){ //loops through each char in the hex array
+            if(hexadec[i]==hexValues[j]){          //checks if the hexadec is in the hex array
                 correctHex = 1;
                 break;
             }
