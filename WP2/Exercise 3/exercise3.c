@@ -23,7 +23,7 @@ PERSON input_record(void){    // Reads a person’s record.
     scanf("%s",person.firstname);                             //Ask for the first name
     printf("Please give a family name for this person:  \n");
     scanf("%s",person.famname);                               //Ask for the family name
-    printf("Please give a personal number for this person:  ");
+    printf("Please give a personal number for this person in YYYYMMDDNNNN form:  ");
     scanf("%s",person.pers_number);                           // Ask for the personal number
     return person;
 };
@@ -52,26 +52,60 @@ void print_file(void){      // Prints out all persons in the file
     fclose(People);         //Close the file after everything has been printed.
 };           
 
-void search_by_firstname(char *nameToSearch[20]){    // Prints out the person if in list
+void search_by_firstname(char nameToSearch[20]){    // Prints out the person if in list
     PERSON Person;
+    char choice[3]; //Char choice variable declaration 
+    int found = 0; //Int found variable declaration used to check if the person is in the file or not
     People=fopen("People.bin","rb");    //Open the file
 
     if (People == NULL){
         printf("\nError while opening the file\n");  //Check if the file exists.
         exit (1);
     }
-    printf("Please give the name you want to search: ");
-    scanf("%s", nameToSearch);             // Ask for name to look for.
+                                                                         //Ask the user if they want to search by first or family name
+    printf("Type (N) if you want to search by first name or (F) if you want to search by family name: \n"); 
+    fflush(stdin);                                                         //Remove any buffer that could affect the user's input
+    fgets(choice, 3, stdin);                                               //Gets the user's input and saves it to choice 
+    choice[strcspn(choice, "\r\n")] = 0;                                  // Remove newline character
 
-    while(fread(&Person, sizeof(PERSON), 1, People) == 1){
-        if(strcmp(Person.firstname, nameToSearch) == 0){ //If the name is found, print this person's details. 
-            printf("First name: %s\n", Person.firstname);
-            printf("Last name: %s\n", Person.famname);
-            printf("Personal number: %s\n", Person.pers_number);
+    if (strcmp(choice, "N") == 0){                                       //Checks if the user wants to search by first name
+        printf("Please give the first name of the person you want to search: ");
+        scanf("%s", nameToSearch);                                       // Ask for first name to look for.
+
+        while(fread(&Person, sizeof(PERSON), 1, People) == 1){
+            if(strcmp(Person.firstname, nameToSearch) == 0){            //If the first name is found, print this person's details. 
+                printf("First name: %s\n", Person.firstname);
+                printf("Last name: %s\n", Person.famname);
+                printf("Personal number: %s\n", Person.pers_number);
+                printf("--------------------\n");
+                found = 1;                                             //If person exists found is equal to 1
+            }
+        }
+        if(found == 0){                                               //If found is equal to 0 then person does not exist
+            printf("Error: The person was not found!");
         }
     }
-    fclose(People);            //Close the file after the search has been completed.*/
+    else if (strcmp(choice, "F") == 0){                                 //Checks if the user wants to search by family name
+        printf("Please give the family name of the person you want to search: ");
+        scanf("%s", nameToSearch);                                      // Ask for family name to look for.
 
+        while(fread(&Person, sizeof(PERSON), 1, People) == 1){
+            if(strcmp(Person.famname, nameToSearch) == 0){              //If the family name is found, print this person's details. 
+                printf("First name: %s\n", Person.firstname);
+                printf("Last name: %s\n", Person.famname);
+                printf("Personal number: %s\n", Person.pers_number);
+                printf("--------------------\n");
+                found = 1;        //If person exists found is equal to 1
+            }
+        }
+        if(found == 0){          //If found is equal to 0 then person does not exist
+            printf("Error: The person was not found!");
+        }
+    }
+    else{                        //Prints an error message if the user gives a choice other than N or F 
+        printf("Error: Invalid input, please give either (N) for search by first name or (F) for search by family name.\n");
+    }
+    fclose(People);            //Close the file after the search has been completed.*/
 };
 
 void append_file(PERSON *inrecord){ // appends a new person to the file
