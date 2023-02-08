@@ -2,27 +2,45 @@
 #include <stdio.h>
 #include <string.h>
 
-void copyString(char input[20]) // Method to copy the given string to another array
+//defining the max number of characters in the string array
+#define MAX 20
+
+//function to copy the given character array to another array
+void copyString(char input[MAX], char stringToCpyTo[MAX]) 
 {
-char stringToCpyTo[20] = input; // Copy the string
-printf("%s", stringToCpyTo);    // Print it
+    int i; 
+    //iterate through each element in the given string while the string is ongoing
+    for(i=0; input[i] != '\0'; i++){
+        //make the copy of the string equal to the given string (ie. the user's input)
+        stringToCpyTo[i] = input[i];
+    }
+    stringToCpyTo[i] = '\0';   //end of string character
 }
 
-int main(){
-char stringToRead[20];          // Variable initialization
-char stringCopy[20];
+//main function
+int main(int argc, char *argv[]){
+//variable declaration
+char stringToRead[MAX + 1];   //user's input string
+char stringCopy1[MAX + 1];    //copied string using copyString()
+char stringCopy2[MAX + 1];   //copied string user strcpy()
 
-FILE *E6;
-E6 = fopen("myfile.txt", "w"); // Create file and open it
+//if 2 arguments are given (ie. the text file)
+ if (argc == 2) {
+        //reading from text file
+        strncpy(stringToRead, argv[1], 20);
+        stringToRead [MAX] = '\0';
+    } else {
+        //reading from keyboard
+        printf(" \nPlease type a string: \n"); //ask the user to input a string
+        fgets(stringToRead, 20, stdin);     //get the string from the user's input
+        stringToRead[strcspn(stringToRead, "\r\n")] = 0; //ensure no empty lines are printed
+    }
+copyString(stringToRead, stringCopy1);  //copy the string using copyString()
+strcpy(stringCopy2, stringToRead); //copy the string using strcopy()
 
-printf(" \n Please type a string: \n");
-scanf("%s", &stringToRead);     // Scan the string given by the user
-copyString(stringToRead);       // Copy it using the method above
-fprintf(E6,"%s", stringToRead); // Add the original string to the file
 
-strcpy(stringToRead, stringCopy); // Copy using strcpy method
+printf("The copied string using copyString() is: %s \n", stringCopy1);    //print stringCopy1
+printf("The copied string using strcpy() is: %s \n", stringCopy2);        //print stringCopy2
 
-printf("The copied string is: ");
-puts(stringCopy);                 // Print the copied string
-    return 0;
+return 0;
 }
