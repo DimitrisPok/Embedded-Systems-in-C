@@ -23,9 +23,9 @@ int main (void){
         //print each value of the array
         printf("%d = %d \n", i, array[i]);
         //print each value of the array and each value multiplied by 2
-        printf("multiplied by 2 = %d\n", array[i] * 2);
+        printf("%d multiplied by 2 = %d\n", array[i], array[i] * 2);
     }
-
+    printf("---------------------------------\n");
     //print the value of the address of the array
     printf("The value of the address of the array (pointer) is: %d \n", *array); //this currently prints the first element in the array?
     //print the first integer in the array
