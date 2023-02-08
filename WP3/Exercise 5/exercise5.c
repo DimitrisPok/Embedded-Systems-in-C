@@ -4,10 +4,6 @@
 
 #define MAX 5
 
-void random_array(int *array){
-
-}
-
 int main (void){
     int array[MAX], i;
 
@@ -27,12 +23,13 @@ int main (void){
     }
     printf("---------------------------------\n");
     //print the value of the address of the array
-    printf("The value of the address of the array (pointer) is: %d \n", *array); //this currently prints the first element in the array?
+    printf("The value of the address of the array (pointer) is: %p \n", &array);
     //print the first integer in the array
     printf("The first integer in the array is: %d\n", array[0]);
     //print the last integer in the array
     printf("The last integer in the array is: %d\n", array[MAX-1]);
-    
+    //print the size of an integer in bytes
+    printf("The size of an integer (number of bytes) is: %lu\n", sizeof(int));
     //assign the size of the array in bytes to arrayInBytes integer variable
     int arrayInBytes = sizeof(array);
     //prints the size of the whole array in bytes
