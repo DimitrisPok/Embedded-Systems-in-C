@@ -5,6 +5,7 @@
 #include <stdlib.h> 
 #include <time.h>
 
+//defining the max number of elements in the array
 #define MAX 99
 
 int main (void){
@@ -15,8 +16,8 @@ int main (void){
 
     //loops through each element in the given array
     for (i = 0; i<MAX; i++){
-        //assignes a random number from 0-99 to randNum integer variable
-        int randNum = (rand() % 100);
+        //assignes a random number from 1-99 to randNum integer variable
+        int randNum = (rand() % 99 + 1);
         //makes every index in the array equal to the randomly generated number
         array[i] = randNum;
         //print each value of the array
