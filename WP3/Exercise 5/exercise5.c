@@ -1,8 +1,11 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 3
+//Submission code: 8777169671
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <time.h>
 
-#define MAX 5
+#define MAX 99
 
 int main (void){
     int array[MAX], i;

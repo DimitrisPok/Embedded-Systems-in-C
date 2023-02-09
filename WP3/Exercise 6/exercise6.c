@@ -1,3 +1,6 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 3
+//Submission code: 8777169671
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -24,14 +27,15 @@ char stringToRead[MAX + 1];   //user's input string
 char stringCopy1[MAX + 1];    //copied string using copyString()
 char stringCopy2[MAX + 1];   //copied string user strcpy()
 
-//if 2 arguments are given (ie. the text file)
- if (argc == 2) {
+//if 2 arguments are given (ie. the text file), since the user is not prompted to do anything
+ if (argc == 2) { //argument 2 is the text file that the user inputs
         //reading from text file
         strncpy(stringToRead, argv[1], 20);
         stringToRead [MAX] = '\0';
     } else {
         //reading from keyboard
         printf(" \nPlease type a string: \n"); //ask the user to input a string
+        printf("\n");
         fgets(stringToRead, 20, stdin);     //get the string from the user's input
         stringToRead[strcspn(stringToRead, "\r\n")] = 0; //ensure no empty lines are printed
     }

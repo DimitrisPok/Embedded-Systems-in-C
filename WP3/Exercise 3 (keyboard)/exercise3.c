@@ -1,3 +1,8 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 3
+//Submission code: 8777169671
+
+
 // Connecting the pins to the correct rows and columns
 const int row1 = 11; // digital pin for steering row 1
 const int row2 = 10; // digital pin for row 2

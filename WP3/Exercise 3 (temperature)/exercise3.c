@@ -1,3 +1,8 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 3
+//Submission code: 8777169671
+
+
 //variable declaration
 int pin13 = 13;
 int sensorPin = 0; //for analog reading

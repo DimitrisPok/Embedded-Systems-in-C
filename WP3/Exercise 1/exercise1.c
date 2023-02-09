@@ -1,3 +1,8 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 3
+//Submission code: 8777169671
+
+
 //variable declaration
 const int pinLed1 = 12;    //pin for led (button)
 const int pinLed2 = 8;    // pin for led (periodic)
