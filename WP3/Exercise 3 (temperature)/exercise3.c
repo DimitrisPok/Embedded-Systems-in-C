@@ -4,33 +4,57 @@
 
 
 //variable declaration
-int pin13 = 13;
 int sensorPin = 0; //for analog reading
-int sensorPin1 = 1;
+int redPin = 12; //for the red led
+int greenPin = 11; //for the green led
+int bluePin = 10; //for the blue led
 
 void setup()
 {
-  Serial.begin(9600); //serial begin
-  pinMode(pin13, OUTPUT); //set the output
+  Serial.begin(9600);
+  pinMode (redPin, OUTPUT); //send the pin output for the red led
+  pinMode (greenPin, OUTPUT); //send the pin output for the green led
+  pinMode (bluePin, OUTPUT); //send the pin output for the blue led
 }
+
 
 void loop()
 {
   delay(500);
  //getting the voltage reading from the temperature sensor
  int reading = analogRead(sensorPin); 
- int readingProx = analogRead(sensorPin1);
- //printing the sensor proximity
- Serial.print("Proximity: "); 
- Serial.println(readingProx); 
  
  //getting the voltage and saving it to variable volt
  float volt = reading * 5.0195;
  volt /= 1024.0; 
- //print out the voltage
- Serial.print(volt); Serial.println(" volts");
+ float voltage= volt*1000; //turn the voltage to mV unit 
+
  
- //now print out the temperature
- float temperatureC = (volt - 0.5) * 100 ;  //converting the voltage to temperature in Celsius
+ // now print out the temperature
+ float temperatureC = (voltage - 500) / 10 ;  //converting the voltage to temperature in Celsius
  Serial.print(temperatureC); Serial.println(" degrees C");
+  
+  //check if the temperature is less than -12
+  if (temperatureC<=-12){
+    digitalWrite(bluePin, HIGH); //if so, turn the blue led on
+    //make sure the other leds are off in this condition
+    digitalWrite(redPin, LOW); 
+    digitalWrite(greenPin, LOW);
+  }
+  //check if the temperature is greater than 21
+  else if (temperatureC>=21){
+    digitalWrite(redPin, HIGH); //if so, turn the red led on
+    //make sure the other leds are off in this condition
+    digitalWrite(bluePin, LOW);
+    digitalWrite(greenPin, LOW);
+  }
+  //otherwise the green led should be on
+  else{
+    digitalWrite(greenPin, HIGH);
+    //make sure the other leds are off in this condition
+    digitalWrite(redPin, LOW);
+    digitalWrite(bluePin, LOW);
+  }
+  
+
 }
