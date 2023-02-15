@@ -3,16 +3,17 @@
 
 //variable declaration
 int sensorAnalog = 0; //for analog reading
-int neoPin = 2; //neopixel digital pin
+int neoPin = 3; //neopixel digital pin
 int pixelNum = 24; //number of pixels
 int maxled; //maxled variable initialization
-
+int ledPin = 2; 
 //neopixel object declaration
 Adafruit_NeoPixel neopixel = Adafruit_NeoPixel(pixelNum, neoPin, NEO_GRB + NEO_KHZ800);
 
 void setup()
 {
   Serial.begin(9600); //serial begin
+  pinMode (ledPin, OUTPUT); //ledPin output
   neopixel.begin(); //neopixel start
   neopixel.setBrightness(255); //set neopixel to max brightness
   neopixel.show(); //neopixel show
@@ -60,10 +61,11 @@ void loop()
       else{
         neopixel.setPixelColor(i, red);
       }
-    } else { //else close the pixel
-      neopixel.setPixelColor(i,0,0,0);
-    }
-    }
-  	delay(100); //delay by 100 ms
-    neopixel.show(); //neopixel show
+    } else {
+      neopixel.setPixelColor(i,0,0,0); //turn off the neopixel
+      digitalWrite(ledPin, HIGH); //turn on the red led
+   	}
+  }
+  delay(100); //delay by 100 ms
+  neopixel.show(); //neopixel show
 }
