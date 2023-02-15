@@ -12,7 +12,7 @@ int search_number(int number, int tab[], int size){
         }
     }
     if(found == 1){
-        printf("%d is found at position %d", number, i+1);
+        printf("%d is found at position %d", number, i);
         return 0;
     }else{
         printf("%d was not found in the array", number);
