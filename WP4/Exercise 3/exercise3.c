@@ -1,3 +1,7 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 4
+//Submission code: 8370587912
+
 //neopixel library import
 #include <Adafruit_NeoPixel.h> 
 

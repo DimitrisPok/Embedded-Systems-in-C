@@ -1,5 +1,10 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 4
+//Submission code: 8370587912
+
+//Add all libraries
 #include <avr/io.h>
-#include <avr/interrupt.h> //Add all libraries
+#include <avr/interrupt.h> 
 #include <Servo.h>
 
 int pos = 0; // position variable

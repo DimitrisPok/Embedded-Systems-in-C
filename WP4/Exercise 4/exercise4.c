@@ -1,3 +1,6 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 4
+//Submission code: 8370587912
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
