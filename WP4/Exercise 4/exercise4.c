@@ -35,19 +35,25 @@ void sort (int number, int tab []) {
                 swap(&tab[j], &tab[j + 1]);
 }
 
+void printArray(int tab[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++)
+        printf("%d ", tab[i]);
+    printf("\n");
+}
+
 int main(int argc, char *argv[]){
     int toSearch;
     int test[] = {1,2,34,5,67,3,23,12,13,10}; 
     int number = sizeof(test) / sizeof(test[0]);
-    int choice;
-    printf("What would you like to do: 1. search 2. sort");
-    scanf("%d", &choice);
-    if (choice == 1){
     printf("Enter an element to search: ");
     scanf("%d", &toSearch);
-    } else{
     search_number(toSearch, test, sizeof(test));
+    printf("\n");
+
     sort(number, test);
-    }
+    printf("Sorted array: \n");
+    printArray(test, number);
     return 0;
 }
