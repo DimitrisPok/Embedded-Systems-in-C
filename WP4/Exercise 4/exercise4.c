@@ -21,7 +21,7 @@ int search_number(int number, int tab[], int size){
     }
 }
 
-//method to sort the array
+//method to sort the array using bubble sort algorithm
 void sort(int number, int tab[]){
     int x, y, temp; //variable declarations
     //loop through the array twice
