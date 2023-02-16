@@ -13,7 +13,7 @@ Adafruit_NeoPixel neopixel = Adafruit_NeoPixel(pixelNum, neoPin, NEO_GRB + NEO_K
 
 void setup()
 {
-  setup_timer_1();
+  setup_timer_1(); //calling the timer setup method in setup()
   Serial.begin(9600); //serial begin
   pinMode (ledPin, OUTPUT); //ledPin output
   neopixel.begin(); //neopixel start
@@ -21,6 +21,7 @@ void setup()
   neopixel.show(); //neopixel show
 }
 
+//setting up the timer in a method
 void setup_timer_1()
 {
   cli(); //stops interrupts
@@ -46,6 +47,7 @@ void loop()
  //empty
 }
 
+//ISR method with the timer as parameter and all the logic needed
 ISR(TIMER1_COMPA_vect) 
 {
 //save analog reading from the temperature sensor to a variable
@@ -92,6 +94,5 @@ ISR(TIMER1_COMPA_vect)
       digitalWrite(ledPin, HIGH); //turn on the red led
    	}
   }
-  delay(100); //delay by 100 ms
   neopixel.show(); //neopixel show
 }
