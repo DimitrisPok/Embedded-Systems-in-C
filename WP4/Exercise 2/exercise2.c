@@ -17,6 +17,7 @@ void setup()
 servo_9.attach(9, 500, 2500); // setup servo motor
 Serial.begin(115200);		  // setup serial
 cli();
+
 TCCR0B = 0;                 
 OCR2A = reload;             
 TCCR2A = 1<<WGM21;			// Timer2 setup
@@ -37,13 +38,7 @@ count = 0;
 
 void clock() // clock method
 {
-  // sweep the servo from 0 to 180 degrees in steps of 1 degrees
-  /*for (pos = 0; pos <= 180; pos += 1) {
-    // tell servo to go to position in variable 'pos'
-    servo_9.write(pos);
-    Serial.println(pos);
 
-    }*/
   static int servoPos = 0; // init posotion variable of motor position
   // Set the next servo position
   servoPos += 1;		   // move the motor by 1,
