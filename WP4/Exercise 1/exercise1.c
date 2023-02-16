@@ -2,22 +2,28 @@
 
 #define DATA_RATE 9600 		//Define data rate for Serial
 
-int LED_1 = 3;
-int LED_2 = 4;
-int LED_3 = 5;
-int LED_4 = 6;
-int LED_5 = 7;
+#define TEMP_1 0
+#define TEMP_2 25
+#define TEMP_3 50
+#define TEMP_4 75
+#define TEMP_5 100
+
+#define WHITE 3
+#define BLUE 4
+#define GREEN 5
+#define YELLOW 6
+#define RED 7
   
 void setup()
 {
   setup_timer_1();
   Serial.begin(DATA_RATE);
   
-  pinMode(LED_1, OUTPUT);
-  pinMode(LED_2, OUTPUT);
-  pinMode(LED_3, OUTPUT);
-  pinMode(LED_4, OUTPUT);
-  pinMode(LED_5, OUTPUT);
+  pinMode(WHITE, OUTPUT);
+  pinMode(BLUE, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  pinMode(YELLOW, OUTPUT);
+  pinMode(RED, OUTPUT);
   
 
 }
@@ -54,40 +60,48 @@ ISR(TIMER1_COMPA_vect)
  
   //serial print temperature
   Serial.print(tempC); Serial.println(" degrees C");
-       if (tempC<=-25){ 
-         digitalWrite(LED_1, HIGH);
-         digitalWrite(LED_2, LOW);
-         digitalWrite(LED_3, LOW);
-         digitalWrite(LED_4, LOW);
-         digitalWrite(LED_5, LOW);
+  	  if (tempC < TEMP_1) {
+    	 digitalWrite(WHITE, LOW);
+         digitalWrite(BLUE, LOW);
+         digitalWrite(GREEN, LOW);
+         digitalWrite(YELLOW, LOW);
+         digitalWrite(RED, LOW);
+  	}
+  
+  	  else if (tempC >= TEMP_1 && tempC <= TEMP_2){ 
+         digitalWrite(WHITE, HIGH);
+         digitalWrite(BLUE, LOW);
+         digitalWrite(GREEN, LOW);
+         digitalWrite(YELLOW, LOW);
+         digitalWrite(RED, LOW);
       }
-      else if (tempC<=0){
-         digitalWrite(LED_1, HIGH);
-         digitalWrite(LED_2, HIGH);
-         digitalWrite(LED_3, LOW);
-         digitalWrite(LED_4, LOW);
-         digitalWrite(LED_5, LOW);
+      else if (tempC >= TEMP_2 && tempC <= TEMP_3){
+         digitalWrite(WHITE, HIGH);
+         digitalWrite(BLUE, HIGH);
+         digitalWrite(GREEN, LOW);
+         digitalWrite(YELLOW, LOW);
+         digitalWrite(RED, LOW);
       }
-      else if (tempC<=25) {
-         digitalWrite(LED_1, HIGH);
-         digitalWrite(LED_2, HIGH);
-         digitalWrite(LED_3, HIGH);
-         digitalWrite(LED_4, LOW);
-         digitalWrite(LED_5, LOW);
+      else if (tempC >= TEMP_3 && tempC <= TEMP_4) {
+         digitalWrite(WHITE, HIGH);
+         digitalWrite(BLUE, HIGH);
+         digitalWrite(GREEN, HIGH);
+         digitalWrite(YELLOW, LOW);
+         digitalWrite(RED, LOW);
       }
-      else if (tempC<=50){
-         digitalWrite(LED_1, HIGH);
-         digitalWrite(LED_2, HIGH);
-         digitalWrite(LED_3, HIGH);
-         digitalWrite(LED_4, HIGH);
-         digitalWrite(LED_5, LOW);
+      else if (tempC >= TEMP_4 && tempC <= TEMP_5){
+         digitalWrite(WHITE, HIGH);
+         digitalWrite(BLUE, HIGH);
+         digitalWrite(GREEN, HIGH);
+         digitalWrite(YELLOW, HIGH);
+         digitalWrite(RED, LOW);
       }
-      else{
-         digitalWrite(LED_1, HIGH);
-         digitalWrite(LED_2, HIGH);
-         digitalWrite(LED_3, HIGH);
-         digitalWrite(LED_4, HIGH);
-         digitalWrite(LED_5, HIGH);
+      else if (tempC >= TEMP_5){
+         digitalWrite(WHITE, HIGH);
+         digitalWrite(BLUE, HIGH);
+         digitalWrite(GREEN, HIGH);
+         digitalWrite(YELLOW, HIGH);
+         digitalWrite(RED, HIGH);
       }
 
 }
