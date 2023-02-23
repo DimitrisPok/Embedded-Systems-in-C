@@ -1,3 +1,8 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 5
+//Submission code: 3049288291
+
+#include <DHT.h>
 
 //define for serial
 #define DATA_RATE 9600 		//Define data rate for Serial
@@ -15,11 +20,15 @@
 #define GREEN 8           //Define LED pin = 8
 #define YELLOW 9          //Define LED pin = 9
 #define RED 10             //Define LED pin = 10
-  
+
+//object for DHT
+DHT dht(A0, DHT11);
+
 void setup()
 {
-  setup_timer_1();         //Calls function
   Serial.begin(DATA_RATE); //Starts serial with defined data rate
+
+  dht.begin(); //DHT begin
   
   pinMode(WHITE, OUTPUT);  //Set white led pinMode as OUTPUT
   pinMode(BLUE, OUTPUT);   //Set blue led pinMode as OUTPUT
@@ -30,36 +39,11 @@ void setup()
 
 }
 
-void setup_timer_1()
-{
-  cli(); //stops interrupts
-  
-  //set timer1 interrupt at 1Hz
-  TCCR1A = 0;  // set entire TCCR1A register to 0
-  TCCR1B = 0;  // same for TCCR1B
-  TCNT1  = 0;  //initialize counter value to 0
-  // set compare match register for 1hz increments
-  OCR1A = 15624;  // = (16*10^6) / (1*1024) - 1 (<65536)
-  // turn on CTC mode
-  TCCR1B |= (1 << WGM12);
-  // Set CS12 and CS10 bits for 1024 prescaler
-  TCCR1B |= (1 << CS12) | (1 << CS10);  
-  // enable timer compare interrupt
-  TIMSK1 |= (1 << OCIE1A);
-  
-  sei(); //allows interrupts
-}
 
 void loop()
 {
-  //empty
-}
-
-ISR(TIMER1_COMPA_vect) //interrupt code below
-{
-  int read = analogRead(A0); //reads analog data from temp sensor
-  int tempC = map(((read - 20) * 3.04), 0, 1023, -40, 125); //converts analog data to celsius
- 
+  float tempC = dht.readTemperature(); // Change it to float type
+  delay(1000);
   //serial print temperature
   Serial.print(tempC); Serial.println(" degrees C");
   	  if (tempC < TEMP_1) {          //if temp is less than 0

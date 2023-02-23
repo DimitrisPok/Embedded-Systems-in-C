@@ -1,41 +1,46 @@
 //(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
-//Work package 3
-//Submission code: 8777169671
+//Work package 5
+//Submission code: 3049288291
 
-#include <dht11.h> 
+#include <DHT.h>
 
 //variable declaration
-int lightAnalog = 0; //for analog reading
-int temperatureAnalog = 1; //for analog reading
+int lightAnalog = A0; //for analog reading
+int temperatureAnalog = A1; //for analog reading
 int redPin = 4; //for the red led
 int greenPin = 5; //for the green led
 int bluePin = 6; //for the blue led
 
+//object for DHT
+DHT dht(A1, DHT11);
+
 void setup()
 {
-  Serial.begin(9600);
+  
+  Serial.begin(9600); // Initialize serial communication at 9600
+  dht.begin(); //DHT begin
   pinMode (redPin, OUTPUT); //send the pin output for the red led
   pinMode (greenPin, OUTPUT); //send the pin output for the green led
   pinMode (bluePin, OUTPUT); //send the pin output for the blue led
+    
+  pinMode(lightAnalog, INPUT); 
+  pinMode(temperatureAnalog, INPUT);
+  
 }
 
-
 void loop()
-{
+{ 
+  float temperatureC = dht.readTemperature(); // Change it to float type
+  int lightIntensity = analogRead(lightAnalog);
+
+  (lightAnalog); //Reads the analog value of the light sensor
+
+  lightIntensity = map(lightIntensity, 6, 679, 0, 100); // Changes the light value to percentage value
+  
+  
+  Serial.println(temperatureC); Serial.println(" degrees C");// Prints the temperature in Celsius
+  Serial.println(lightIntensity); Serial.println("%");// Print the light
   delay(500);
-//save analog reading from the temperature sensor to a variable
- int readTemp = analogRead(temperatureAnalog);
- //convert read to celsius
- int temperatureC = map(((readTemp - 20) * 3.04), 0, 1023, -40, 125);
- 
- //serial print temperature
- Serial.print(temperatureC); Serial.println(" degrees C");
-  
- int readLight = analogRead(lightAnalog); //Read the analog value of the photoresistor
- int lightIntensity = map(readLight,6,679,0,100); //convert the value to be in the range of 0-100
- //serial print light intensity
- Serial.print(lightIntensity); Serial.println("%");
-  
   
   //if the light intensity is 0
   if(lightIntensity==0){
@@ -113,5 +118,4 @@ void loop()
       digitalWrite(bluePin, LOW);
     }
   }
-
 }

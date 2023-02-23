@@ -1,3 +1,7 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 5
+//Submission code: 3049288291
+
 //variable declaration
 const int redPin = 8; //Red LED digital pin
 const int bluePin = 7; //Blue LED digital pin
