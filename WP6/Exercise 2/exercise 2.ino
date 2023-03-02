@@ -1,27 +1,41 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 6
+//Submission code: 2599643369
 
-// define pin numbers for buzzer
-const int trigPin = 7;
-const int echoPin = 6;
-const int buzzer = 12;
+//max distance 200cm
+//min distance 25cm
+//all 4 leds when distance less than 30cm
+//only 1 led when distance less than 200cm
+//tone activated when object closer than 200cm & gets louder the close the object gets
+//when closer than 25cm, all leds should blink and tone should be super annoying
+//through individual functions
+
+//-----------------------------------------------------------------------------------------//
+
+//define pin numbers for ultrasonic sensor
+const int TRIG_PIN = 7;
+const int ECHO_PIN = 6;
+//define pin number for buzzer
+const int BUZZER = 12;
 //define led pin numbers
-const int led1 = 11;
-const int led2 = 10;
-const int led3 = 9;
-const int led4 = 8;
+const int LED_1 = 11;
+const int LED_2 = 10;
+const int LED_3 = 9;
+const int LED_4 = 8;
 
 //set up function
 void setup()
 {
   //ultrasonic output and input
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+  pinMode(TRIG_PIN, OUTPUT); // Sets the trigPin as an Output
+  pinMode(ECHO_PIN, INPUT); // Sets the echoPin as an Input
   //buzzer output
-  pinMode(buzzer,OUTPUT);//initialize the buzzer pin as an output
+  pinMode(BUZZER, OUTPUT);//initialize the buzzer pin as an output
   //Led output
-  pinMode(led1, OUTPUT);
-  pinMode(led2, OUTPUT);
-  pinMode(led3, OUTPUT);
-  pinMode(led4, OUTPUT);
+  pinMode(LED_1, OUTPUT);
+  pinMode(LED_2, OUTPUT);
+  pinMode(LED_3, OUTPUT);
+  pinMode(LED_4, OUTPUT);
 
   Serial.begin(9600); // Starts the serial communication
 }
@@ -33,42 +47,70 @@ void loop()
   if (dist <= 25){ //if distance is less than or equal to 25
     playAnnoyingSound(); //run the play annoying sound method
     blinkAllLEDs(); //and blink all leds
-
-  } else if(dist <= 30){ //if distance is less than or equal to 30
+  } 
+  else if(dist <= 30){ //if distance is less than or equal to 30 
+    buzz1(); 
     turnOnLed(); //turn on all leds
   }
+  else if(dist <= 50){ //if distance is less than or equal to 50
+    buzz();
+    turnOn3Leds(); //and turn on 3 leds
+  }
+  else if(dist <= 100){ //if distance is less than or equal to 100
+    buzz2();
+    turnOn2Leds(); //and turn on the 2 leds
+  }
   else if(dist <= 200){ //if distance is less than or equal to 200
-    int volume = map(dist, 30, 200, 0, 255); //map the distance to the volume level
-    buzz(volume); //run the buzzer method
+    buzz3();
     turnOn1Led(); //and turn on the first led
-  } else{ //otherwise 
+  } 
+  else{ //otherwise
     turnOffLed(); //turn off all leds
+    noTone(BUZZER); //stop the tone emitted from the buzzer
   }
   delay(500); //added delay to slow down serial print
 }
 
-//method to turn on the first led
+//turn on the first led
 void turnOn1Led()
 {
-  digitalWrite(led1, HIGH); //turn on first led
+  digitalWrite(LED_1, HIGH); //turn on first led
 }
 
-//method to turn on all leds
+//turn on two leds
+void turnOn2Leds()
+{
+  digitalWrite(LED_1, HIGH); //turn on first led
+  digitalWrite(LED_2, HIGH); //turn on second led
+  digitalWrite(LED_3, LOW); //turn off third led
+  digitalWrite(LED_4, LOW); //turn off fourth led  
+}
+
+//turn on three leds
+void turnOn3Leds()
+{
+  digitalWrite(LED_1, HIGH); //turn on first led
+  digitalWrite(LED_2, HIGH); //turn on second led
+  digitalWrite(LED_3, HIGH); //turn on third led
+  digitalWrite(LED_4, LOW); //turn off fourth led
+}
+
+//turn on all four leds
 void turnOnLed()
 {
-  digitalWrite(led1, HIGH); //turn on first led
-  digitalWrite(led2, HIGH); //turn on second led
-  digitalWrite(led3, HIGH); //turn on third led
-  digitalWrite(led4, HIGH); //turn on fourth led
+  digitalWrite(LED_1, HIGH); //turn on first led
+  digitalWrite(LED_2, HIGH); //turn on second led
+  digitalWrite(LED_3, HIGH); //turn on third led
+  digitalWrite(LED_4, HIGH); //turn on fourth led
 }
 
-//method to turn of all leds
+//method to turn off all leds
 void turnOffLed()
 {
-    digitalWrite(led1, LOW); //turn off first led
-    digitalWrite(led2, LOW); //turn off second led
-    digitalWrite(led3, LOW); //turn off third led
-    digitalWrite(led4, LOW); //turn off fourth led
+    digitalWrite(LED_1, LOW); //turn off first led
+    digitalWrite(LED_2, LOW); //turn off second led
+    digitalWrite(LED_3, LOW); //turn off third led
+    digitalWrite(LED_4, LOW); //turn off fourth led
 }
 
 //method to make all leds blink
@@ -81,15 +123,27 @@ void blinkAllLEDs() {
 
 //method to play annoying buzzing sound
 void playAnnoyingSound() {
-    digitalWrite(buzzer, HIGH); //turn on buzzer
-    delay(100); //delay for 100 ms
-    digitalWrite(buzzer, LOW); // turn off buzzer
+    digitalWrite(BUZZER, HIGH); //turn on buzzer
     delay(100); //delay for 100 ms
   }
 
-//method to tone the buzzer (takes in a volume)
-void buzz(int vol) {
-  tone(buzzer, 440, vol); //tone buzzer according to volume which is decided by maping the distance
+void buzz() {
+  tone(BUZZER, 440, 100); //tone buzzer according to specified frequency and duration
+}
+
+
+void buzz1() {
+  tone(BUZZER, 140, 200); //tone buzzer according to specified frequency and duration
+}
+
+void buzz2() {
+  tone(BUZZER, 240, 400); //tone buzzer according to specified frequency and duration
+  delay(500);             //delay between tones
+}
+
+void buzz3() {
+  tone(BUZZER, 340, 600); //tone buzzer according to specified frequency and duration
+  delay(1000);            //delay between tones
 }
 
 //method to calculate the distance using the ultrasonic sensor
@@ -99,14 +153,14 @@ int ultraSonic()
   long duration;
   int distance;
   // Clears the trigPin
-  digitalWrite(trigPin, LOW);
+  digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  digitalWrite(trigPin, HIGH);
+  // Sets the trigPin on HIGH state for 10 microseconds
+  digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
+  digitalWrite(TRIG_PIN, LOW);
   // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
+  duration = pulseIn(ECHO_PIN, HIGH);
   // Calculating the distance
   distance = duration * 0.034 / 2;
   // Prints the distance on the Serial Monitor

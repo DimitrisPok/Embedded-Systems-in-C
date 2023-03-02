@@ -1,3 +1,7 @@
+//(C) Dimitrios Pokkias, Sepehr Moradian, Shahd Metwally; Group: 22
+//Work package 6
+//Submission code: 2599643369
+
 // WP 6 Exercise 1 Template DIT 632
 
 #define ENCA 2
